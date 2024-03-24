@@ -25,13 +25,17 @@ class CityRepository {
     }
   }
 
-  async UpdateCity(cityId, data) {
+  async updateCity(cityId, data) {
     try {
       const city = await City.update(data, {
         where: {
           id: cityId,
-        },
-      });
+      },
+     });
+
+    // const city = await City.findOne(cityId);
+    // city.name = data;
+    // await city.save();
       return city;
     } catch (error) {
       console.log("something went wrong in the repository layer");
@@ -42,12 +46,15 @@ class CityRepository {
   async getCity(cityId) {
     try {
       const city = await City.findByPk(cityId);
+      //const city = await City.filter((city) => city.id == cityId);
       return city;
     } catch (error) {
       console.log("something went wrong in the repository layer");
       throw { error };
     }
   }
+
+  
 }
 
 module.exports = CityRepository;
